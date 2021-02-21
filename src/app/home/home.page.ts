@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  constructor() {}
-
+  movies;
+  constructor(private firestore: AngularFirestore) {
+    this.firestore
+      .collection('movies')
+      .valueChanges({ idField: 'movieId' })
+      .subscribe((movies) => {
+        this.movies = movies;
+        console.log(movies);
+      });
+  }
 }

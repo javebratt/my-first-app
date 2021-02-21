@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Add a new Movie</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Movie Title</ion-label>
+    <ion-input type="text" [(ngModel)]="movie.title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Movie Rating</ion-label>
+    <ion-input type="number" [(ngModel)]="movie.rating"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="saveMovie()">Save Movie</ion-button>
+  <ion-button
+    expand="block"
+    color="danger"
+    (click)="deleteMovie()"
+    *ngIf="movieId !== 'new'"
+    >Delete Movie</ion-button
+  >
+</ion-content>
