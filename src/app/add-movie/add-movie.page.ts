@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { Plugins, CameraResultType } from '@capacitor/core';
+
+const { Camera } = Plugins;
 
 @Component({
   selector: 'app-add-movie',
@@ -11,12 +16,14 @@ export class AddMoviePage implements OnInit {
   movie = {
     title: '',
     rating: 0,
+    img: null,
   };
   movieId: string = 'new';
   constructor(
     private firestore: AngularFirestore,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit() {
@@ -59,6 +66,35 @@ export class AddMoviePage implements OnInit {
           this.movie = null;
           this.router.navigateByUrl('');
         });
+    }
+  }
+
+  async takePicture(): Promise<void> {
+    try {
+      const moviePicture = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Base64,
+      });
+
+      const moviePictureRef = this.storage.ref(
+        `movies/${this.movieId}/moviePicture.png`
+      );
+
+      moviePictureRef
+        .putString(moviePicture.base64String, 'base64', {
+          contentType: 'image/png',
+        })
+        .then(() => {
+          moviePictureRef.getDownloadURL().subscribe((downloadURL) => {
+            this.movie.img = downloadURL;
+            console.log(this.movie);
+          });
+        });
+
+      console.log(moviePicture);
+    } catch (error) {
+      console.warn(error);
     }
   }
 }

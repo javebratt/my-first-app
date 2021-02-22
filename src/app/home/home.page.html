@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
+  <ion-list lines="none">
     <ion-item
       *ngFor="let movie of movies"
       routerLink="/add-movie/{{movie.movieId}}"
