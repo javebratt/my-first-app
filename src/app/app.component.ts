@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { PushNotificationService } from './services/push-notification.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +9,18 @@ import { SwUpdate } from '@angular/service-worker';
 })
 export class AppComponent {
   public installPrompt = null;
-  constructor(private swUpdate: SwUpdate) {
+  constructor(
+    private swUpdate: SwUpdate,
+    private pushNotificationService: PushNotificationService
+  ) {
     if (this.swUpdate.available) {
       this.swUpdate.available.subscribe(() => {
         if (confirm('A new version is available. Load it?'))
           window.location.reload();
       });
     }
+    this.pushNotificationService.requestPermission();
+    this.pushNotificationService.receiveMessage();
   }
 
   getInstallPrompt(): void {

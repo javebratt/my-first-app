@@ -30,7 +30,8 @@
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
               },
-              "src/manifest.webmanifest"
+              "src/manifest.webmanifest",
+              "/Users/javebratt/Development/courses/my-first-app/src/firebase-messaging-sw.js"
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": []
