@@ -31,7 +31,8 @@
                 "output": "./svg"
               },
               "src/manifest.webmanifest",
-              "/Users/javebratt/Development/courses/my-first-app/src/firebase-messaging-sw.js"
+              "/Users/javebratt/Development/courses/my-first-app/src/firebase-messaging-sw.js",
+              "/Users/javebratt/Development/courses/my-first-app/src/robots.txt"
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": []

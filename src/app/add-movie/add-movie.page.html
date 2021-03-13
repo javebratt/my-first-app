@@ -15,7 +15,7 @@
     <ion-input type="number" [(ngModel)]="movie.rating"></ion-input>
   </ion-item>
 
-  <img *ngIf="movie.img" [src]="movie.img" />
+  <img *ngIf="movie.img" [src]="movie.img" alt="Poster for {{movie.title}}" />
 
   <ion-button expand="block" (click)="saveMovie()">Save Movie</ion-button>
   <ion-button
